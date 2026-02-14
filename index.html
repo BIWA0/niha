@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat with Biwa ❤️</title>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #1a1a1a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#chatbox {
+    width: 90%;
+    max-width: 400px;
+    height: 500px;
+    background: #222;
+    border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 8px 12px;
+    border-radius: 20px;
+    max-width: 80%;
+}
+
+.user {
+    background: #ff4d6d;
+    align-self: flex-end;
+}
+
+.bot {
+    background: #444;
+    align-self: flex-start;
+}
+
+#inputArea {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    margin-top: 10px;
+}
+
+#userInput {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+#sendBtn {
+    padding: 10px 15px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 20px;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h2>Chat with Biwa ❤️</h2>
+<div id="chatbox"></div>
+
+<div id="inputArea">
+    <input type="text" id="userInput" placeholder="Type something..." />
+    <button id="sendBtn">Send</button>
+</div>
+
+<script>
+const chatbox = document.getElementById("chatbox");
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+
+// Preset responses
+const responses = {
+    "hi": "Hi Niha! 😘 How are you today?",
+    "hello": "Hey Niha! ❤️",
+    "i love you": "Aww Niha 😍 I love you too, always!",
+    "how are you": "I’m thinking about you... and smiling 😊",
+    "what are you doing": "Just dreaming about our next chat together 😏",
+    "bye": "Goodbye Niha 😘 Talk to you soon!"
+};
+
+// Default response
+const defaultResponse = "Hehe 😄 I’m just happy chatting with you, Niha!";
+
+function addMessage(text, sender) {
+    const msg = document.createElement("div");
+    msg.classList.add("message", sender);
+    msg.textContent = text;
+    chatbox.appendChild(msg);
+    chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+function getResponse(input) {
+    const key = input.toLowerCase();
+    return responses[key] || defaultResponse;
+}
+
+sendBtn.addEventListener("click", () => {
+    const input = userInput.value.trim();
+    if (input === "") return;
+    addMessage(input, "user");
+    const botReply = getResponse(input);
+    setTimeout(() => addMessage(botReply, "bot"), 500);
+    userInput.value = "";
+});
+
+userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendBtn.click();
+});
+</script>
+
+</body>
+</html>
