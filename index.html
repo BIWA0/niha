@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Niha ❤️</title>
 
+<style>
+body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.message {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    font-size: 28px;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.balloon {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background: red;
+    border-radius: 50%;
+    animation: float 10s infinite ease-in;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-100vh); }
+}
+
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: gold;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    to {
+        transform: scale(15);
+        opacity: 0;
+    }
+}
+
+.glow {
+    font-size: 36px;
+    color: #ff4d6d;
+    text-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div id="text" class="message"></div>
+
+<script>
+const lines = [
+"Niha...",
+"You walked into my life quietly.",
+"But you became my loudest heartbeat.",
+"Distance tried to test us.",
+"But it only made me sure.",
+"In every lifetime...",
+"I choose you."
+];
+
+let i = 0;
+const textDiv = document.getElementById("text");
+
+function showNextLine() {
+    if (i < lines.length) {
+        textDiv.style.opacity = 0;
+        setTimeout(() => {
+            textDiv.innerHTML = lines[i];
+            textDiv.style.opacity = 1;
+            i++;
+        }, 1000);
+        setTimeout(showNextLine, 4000);
+    } else {
+        textDiv.innerHTML = "<div class='glow'>Happy Valentine's Day, Niha ❤️</div>";
+        createFireworks();
+    }
+}
+
+function createBalloons() {
+    for (let j = 0; j < 20; j++) {
+        let balloon = document.createElement("div");
+        balloon.className = "balloon";
+        balloon.style.left = Math.random() * 100 + "vw";
+        balloon.style.animationDuration = (5 + Math.random() * 5) + "s";
+        document.body.appendChild(balloon);
+    }
+}
+
+function createFireworks() {
+    for (let k = 0; k < 50; k++) {
+        let firework = document.createElement("div");
+        firework.className = "firework";
+        firework.style.left = Math.random() * 100 + "vw";
+        firework.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(firework);
+    }
+}
+
+createBalloons();
+setTimeout(showNextLine, 2000);
+</script>
+
+</body>
+</html>
